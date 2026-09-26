@@ -29,7 +29,7 @@ def _changelog_in_diff(repo_path: str) -> bool | None:
             text=True,
         )
         if result.returncode == 0:
-            changed = [p.strip().lower() for p in result.stdout.splitlines()]
+            changed = [Path(p.strip()).name.lower() for p in result.stdout.splitlines() if p.strip()]
             return "changelog.md" in changed
     return None
 
